@@ -4,7 +4,8 @@
 阅读理解[serve-favicon](https://github.com/expressjs/serve-favicon)模块代码
 
 ## 项目内容介绍  
-借阅理解资料存放在docs文件夹内。  
+模块功能：将网页图标缓存入本地，减少请求。
+- 借阅理解资料存放在docs文件夹内。  
 
 
 ## 模块介绍
