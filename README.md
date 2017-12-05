@@ -73,4 +73,4 @@ var server = http.createServer(function onRequest (req, res) {
 server.listen(3000)  
 
 - License    
-[MIT](https://github.com/expressjs/serve-favicon/blob/master/LICENSE)
+[MIT](https://github.com/WuXiaoTon/17-nodejs-readfile/blob/master/LICENSE)
