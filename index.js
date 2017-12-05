@@ -6,137 +6,137 @@
  * MIT Licensed
  */
 
-'use strict' //ÑÏ¸ñÄ£Ê½
+'use strict' //ä¸¥æ ¼æ¨¡å¼
 
 /**
- * Module dependencies.//Ä£¿éÒÀÀµ
- * @private//Ë½ÓĞ
+ * Module dependencies.//æ¨¡å—ä¾èµ–
+ * @private//ç§æœ‰
  */
-//safe-buffer¡¢etag¡¢fs¡¢ms¡¢parseurl¡¢path¼ûÒıÓÃÄ£¿éÎÄ¼ş
+//safe-bufferã€etagã€fsã€msã€parseurlã€pathè§å¼•ç”¨æ¨¡å—æ–‡ä»¶
 var Buffer = require('safe-buffer').Buffer
 var etag = require('etag')
 var fresh = require('fresh')
-var fs = require('fs')  //ÎÄ¼şÄ£¿é
+var fs = require('fs')  //æ–‡ä»¶æ¨¡å—
 var ms = require('ms')
 var parseUrl = require('parseurl') 
-var path = require('path')  //Â·¾¶
+var path = require('path')  //è·¯å¾„
 var resolve = path.resolve
 
 /**
- * Module exports.//Ä£¿é³ö¿Ú
- * @public//¹«ÓĞ
+ * Module exports.//æ¨¡å—å‡ºå£
+ * @public//å…¬æœ‰
  */
 
-module.exports = favicon   //³ö¿ÚÎªfavicon
+module.exports = favicon   //å‡ºå£ä¸ºfavicon
 
 /**
- * Module variables.//Ä£¿é±äÁ¿
- * @private//Ë½ÓĞ
+ * Module variables.//æ¨¡å—å˜é‡
+ * @private//ç§æœ‰
  */
 
 var ONE_YEAR_MS = 60 * 60 * 24 * 365 * 1000 // 1 year
 
 /**
- * Serves the favicon located by the given `path`.//Ö¸¶¨Â·¾¶Ìá¹©Í¼±ê
+ * Serves the favicon located by the given `path`.//æŒ‡å®šè·¯å¾„æä¾›å›¾æ ‡
  *
  * @public
- * @param {String|Buffer} path //²ÎÊı£ºpathÂ·¾¶string|buffer
- * @param {Object} [options] //²ÎÊı£º    object²ÎÊı
- * @return {Function} middleware//·µ»ØÖµ£ºmiddlewareÖĞ¼ä¼ş function
+ * @param {String|Buffer} path //å‚æ•°ï¼špathè·¯å¾„string|buffer
+ * @param {Object} [options] //å‚æ•°ï¼š    objectå‚æ•°
+ * @return {Function} middleware//è¿”å›å€¼ï¼šmiddlewareä¸­é—´ä»¶ function
  */
 
 function favicon (path, options) {
   var opts = options || {}
 
-  var icon // favicon cache  //»º´æ
-  var maxAge = calcMaxAge(opts.maxAge)  //¼ûÏÂÃæµÄº¯Êı
+  var icon // favicon cache  //ç¼“å­˜
+  var maxAge = calcMaxAge(opts.maxAge)  //è§ä¸‹é¢çš„å‡½æ•°
 
-  if (!path) {  //Èç¹ûÂ·¾¶´íÎó£¬Å×³ö´íÎópath to favicon.ico is required
+  if (!path) {  //å¦‚æœè·¯å¾„é”™è¯¯ï¼ŒæŠ›å‡ºé”™è¯¯path to favicon.ico is required
     throw new TypeError('path to favicon.ico is required')
   }
 
-  if (Buffer.isBuffer(path)) {  //¼ì²âÂ·¾¶ÊÇ·ñÎªbuffer¶ÔÏó
-    icon = createIcon(Buffer.from(path), maxAge)  //¼ûÏÂÃæº¯Êı
-  } else if (typeof path === 'string') {  //¼ì²âÂ·¾¶ÊÇ·ñÊÇ×Ö·û´®
-    path = resolveSync(path) ¼ûÏÂÃæº¯Êı
-  } else {  //Â·¾¶²»ÊÇbuffer»ò×Ö·û´®Å×³ö´íÎópath to favicon.ico must be string or buffer
+  if (Buffer.isBuffer(path)) {  //æ£€æµ‹è·¯å¾„æ˜¯å¦ä¸ºbufferå¯¹è±¡
+    icon = createIcon(Buffer.from(path), maxAge)  //è§ä¸‹é¢å‡½æ•°
+  } else if (typeof path === 'string') {  //æ£€æµ‹è·¯å¾„æ˜¯å¦æ˜¯å­—ç¬¦ä¸²
+    path = resolveSync(path) //è§ä¸‹é¢å‡½æ•°
+  } else {  //è·¯å¾„ä¸æ˜¯bufferæˆ–å­—ç¬¦ä¸²æŠ›å‡ºé”™è¯¯path to favicon.ico must be string or buffer
     throw new TypeError('path to favicon.ico must be string or buffer')
   }
 
-  return function favicon (req, res, next) {   //·µ»Øº¯Êı
-    if (parseUrl(req).pathname !== '/favicon.ico') { //½«ÇëÇóURLµØÖ··ÖÎªºÜ¶à²¿·Ö£¬ÌáÈ¡pathname
-      next()  //Ö´ĞĞnextº¯Êı
-      return  //ÍË³ö
+  return function favicon (req, res, next) {   //è¿”å›å‡½æ•°
+    if (parseUrl(req).pathname !== '/favicon.ico') { //å°†è¯·æ±‚URLåœ°å€åˆ†ä¸ºå¾ˆå¤šéƒ¨åˆ†ï¼Œæå–pathname
+      next()  //æ‰§è¡Œnextå‡½æ•°
+      return  //é€€å‡º
     }
 
-    if (req.method !== 'GET' && req.method !== 'HEAD') { //ÇëÇó·½Ê½²»ÊÇGETºÍHEAD
-      res.statusCode = req.method === 'OPTIONS' ? 200 : 405 //ÇëÇó·½Ê½ÔÊĞí¿Í»§¶Ë²é¿´·şÎñÆ÷µÄĞÔÄÜÔò·µ»Ø200³É¹¦£¬·ñÔò·µ»Ø405¿Í»§¶Ë´íÎó
-      res.setHeader('Allow', 'GET, HEAD, OPTIONS') //ÉèÖÃÏìÓ¦Í·
+    if (req.method !== 'GET' && req.method !== 'HEAD') { //è¯·æ±‚æ–¹å¼ä¸æ˜¯GETå’ŒHEAD
+      res.statusCode = req.method === 'OPTIONS' ? 200 : 405 //è¯·æ±‚æ–¹å¼å…è®¸å®¢æˆ·ç«¯æŸ¥çœ‹æœåŠ¡å™¨çš„æ€§èƒ½åˆ™è¿”å›200æˆåŠŸï¼Œå¦åˆ™è¿”å›405å®¢æˆ·ç«¯é”™è¯¯
+      res.setHeader('Allow', 'GET, HEAD, OPTIONS') //è®¾ç½®å“åº”å¤´
       res.setHeader('Content-Length', '0')
-      res.end() //ÏìÓ¦½áÊø
-      return  //ÍË³ö
+      res.end() //å“åº”ç»“æŸ
+      return  //é€€å‡º
     }
 
-    if (icon) {//Èç¹û»º´æÏÂÁËÍ¼±ê
-      send(req, res, icon) //ÏòÒÑÁ¬½ÓµÄsocket¶Ë¿ÚºÅ·¢ËÍÊı¾İ£¬¿´ÏÂÃæº¯Êı
-      return //ÍË³ö
+    if (icon) {//å¦‚æœç¼“å­˜ä¸‹äº†å›¾æ ‡
+      send(req, res, icon) //å‘å·²è¿æ¥çš„socketç«¯å£å·å‘é€æ•°æ®ï¼Œçœ‹ä¸‹é¢å‡½æ•°
+      return //é€€å‡º
     }
 
-    fs.readFile(path, function (err, buf) {//Èç¹ûÃ»ÓĞÍ¼±ê£¬ÏòÖ¸¶¨µÄÂ·¾¶Àï´´½¨Ò»¸ö¡£´´½¨Ò»¸öbuf
+    fs.readFile(path, function (err, buf) {//å¦‚æœæ²¡æœ‰å›¾æ ‡ï¼Œå‘æŒ‡å®šçš„è·¯å¾„é‡Œåˆ›å»ºä¸€ä¸ªã€‚åˆ›å»ºä¸€ä¸ªbuf
       if (err) return next(err)
       icon = createIcon(buf, maxAge)
-      send(req, res, icon)//·¢ËÍÊı¾İ
+      send(req, res, icon)//å‘é€æ•°æ®
     })
   }
 }
 
 /**
- * Calculate the max-age from a configured value. //¸ù¾İÅäÖÃµÄÖµ¼ÆËã×î´óÄêÁä¡£
+ * Calculate the max-age from a configured value. //æ ¹æ®é…ç½®çš„å€¼è®¡ç®—æœ€å¤§å¹´é¾„ã€‚
  *
  * @private
- * @param {string|number} val //²ÎÊı val  string»ònumberÀàĞÍ
- * @return {number}  //·µ»ØÖµ numberÀàĞÍ
+ * @param {string|number} val //å‚æ•° val  stringæˆ–numberç±»å‹
+ * @return {number}  //è¿”å›å€¼ numberç±»å‹
  */
 
 function calcMaxAge (val) {
-  var num = typeof val === 'string'  //´«ÈëvalÎª×Ö·û´®Ôò·µ»ØºÁÃë¸ñÊ½£¬Êı×ÖÔò²»±ä
+  var num = typeof val === 'string'  //ä¼ å…¥valä¸ºå­—ç¬¦ä¸²åˆ™è¿”å›æ¯«ç§’æ ¼å¼ï¼Œæ•°å­—åˆ™ä¸å˜
     ? ms(val)
     : val
 
-  return num != null //Èônum³ö´í£¬·µ»ØÄ¬ÈÏÖµ
-    ? Math.min(Math.max(0, num), ONE_YEAR_MS)  //±£Ö¤num²»Îª¸´Êı£¬ÇÒ²»´óÓÚÒ»ÄêµÄÄ¬ÈÏÖµ
+  return num != null //è‹¥numå‡ºé”™ï¼Œè¿”å›é»˜è®¤å€¼
+    ? Math.min(Math.max(0, num), ONE_YEAR_MS)  //ä¿è¯numä¸ä¸ºå¤æ•°ï¼Œä¸”ä¸å¤§äºä¸€å¹´çš„é»˜è®¤å€¼
     : ONE_YEAR_MS
 }
 
 /**
- * Create icon data from Buffer and max-age.  //´Ó»º³åÇøºÍ×î´óÊ±¼ä´´½¨Í¼±êÊı¾İ¡£
+ * Create icon data from Buffer and max-age.  //ä»ç¼“å†²åŒºå’Œæœ€å¤§æ—¶é—´åˆ›å»ºå›¾æ ‡æ•°æ®ã€‚
  *
  * @private
- * @param {Buffer} buf  //²ÎÊı buf  bufferÀàĞÍ
- * @param {number} maxAge  //²ÎÊı maxAge numberÀàĞÍ
- * @return {object}  //·µ»ØÖµ ¶ÔÏó
+ * @param {Buffer} buf  //å‚æ•° buf  bufferç±»å‹
+ * @param {number} maxAge  //å‚æ•° maxAge numberç±»å‹
+ * @return {object}  //è¿”å›å€¼ å¯¹è±¡
  */
 
 function createIcon (buf, maxAge) {
   return {
     body: buf,
     headers: {
-      'Cache-Control': 'public, max-age=' + Math.floor(maxAge / 1000),   //È¡ÕûÃëÊı£¬Ïê¼ûcache-controlÎÄµµ
-'ETag': etag(buf)	//¿ÉÒÔÓëWeb×ÊÔ´¹ØÁªµÄ¼ÇºÅ£¨token£©¡£
+      'Cache-Control': 'public, max-age=' + Math.floor(maxAge / 1000),   //å–æ•´ç§’æ•°ï¼Œè¯¦è§cache-controlæ–‡æ¡£
+'ETag': etag(buf)	//å¯ä»¥ä¸Webèµ„æºå…³è”çš„è®°å·ï¼ˆtokenï¼‰ã€‚
     }
   }
 }
 
 /**
- * Create EISDIR error.  //´´½¨EISDIR´íÎó¡£
+ * Create EISDIR error.  //åˆ›å»ºEISDIRé”™è¯¯ã€‚
  *
  * @private
- * @param {string} path  //²ÎÊı path  stringÀàĞÍ
- * @return {Error}  //·µ»Ø errorÀàĞÍ
+ * @param {string} path  //å‚æ•° path  stringç±»å‹
+ * @return {Error}  //è¿”å› errorç±»å‹
  */
 
 function createIsDirError (path) {
-  var error = new Error('EISDIR, illegal operation on directory \'' + path + '\'')  //ĞÂ½¨´íÎó£ºEISDIR, xxxxÄ¿Â¼ÉÏµÄ·Ç·¨²Ù×÷
+  var error = new Error('EISDIR, illegal operation on directory \'' + path + '\'')  //æ–°å»ºé”™è¯¯ï¼šEISDIR, xxxxç›®å½•ä¸Šçš„éæ³•æ“ä½œ
   error.code = 'EISDIR'
   error.errno = 28
   error.path = path
@@ -145,25 +145,25 @@ function createIsDirError (path) {
 }
 
 /**
- * Determine if the cached representation is fresh. //È·¶¨»º´æ±íÊ¾ÊÇ·ñĞÂÏÊ¡£
+ * Determine if the cached representation is fresh. //ç¡®å®šç¼“å­˜è¡¨ç¤ºæ˜¯å¦æ–°é²œã€‚
  *
- * @param {object} req  //²ÎÊı req  ¶ÔÏó
- * @param {object} res  //²ÎÊı res  ¶ÔÏó
- * @return {boolean}  //·µ»ØÖµ  ²¼¶ûÖµ
+ * @param {object} req  //å‚æ•° req  å¯¹è±¡
+ * @param {object} res  //å‚æ•° res  å¯¹è±¡
+ * @return {boolean}  //è¿”å›å€¼  å¸ƒå°”å€¼
  * @private
  */
 
 function isFresh (req, res) {
   return fresh(req.headers, {
     'etag': res.getHeader('ETag'),
-    'last-modified': res.getHeader('Last-Modified') //ÔÚä¯ÀÀÆ÷µÚÒ»´ÎÇëÇóÄ³Ò»¸öURLÊ±£¬·şÎñÆ÷¶ËµÄ·µ»Ø×´Ì¬»áÊÇ200£¬ÄÚÈİÊÇ¿Í»§¶ËÇëÇóµÄ×ÊÔ´£¬Í¬Ê±ÓĞÒ»¸öLast-ModifiedµÄÊôĞÔ±ê¼Ç´ËÎÄ¼şÔÚ·şÎñÆ÷¶Ë×îºó±»ĞŞ¸ÄµÄÊ±¼ä¡£
+    'last-modified': res.getHeader('Last-Modified') //åœ¨æµè§ˆå™¨ç¬¬ä¸€æ¬¡è¯·æ±‚æŸä¸€ä¸ªURLæ—¶ï¼ŒæœåŠ¡å™¨ç«¯çš„è¿”å›çŠ¶æ€ä¼šæ˜¯200ï¼Œå†…å®¹æ˜¯å®¢æˆ·ç«¯è¯·æ±‚çš„èµ„æºï¼ŒåŒæ—¶æœ‰ä¸€ä¸ªLast-Modifiedçš„å±æ€§æ ‡è®°æ­¤æ–‡ä»¶åœ¨æœåŠ¡å™¨ç«¯æœ€åè¢«ä¿®æ”¹çš„æ—¶é—´ã€‚
   })
 }
 
 /**
- * Resolve the path to icon.  //½â¾öÍ¼±êµÄÂ·¾¶¡£
+ * Resolve the path to icon.  //è§£å†³å›¾æ ‡çš„è·¯å¾„ã€‚
  *
- * @param {string} iconPath  //²ÎÊı icon  stringÀàĞÍ
+ * @param {string} iconPath  //å‚æ•° icon  stringç±»å‹
  * @private
  */
 
@@ -171,7 +171,7 @@ function resolveSync (iconPath) {
   var path = resolve(iconPath)
   var stat = fs.statSync(path)
 
-  if (stat.isDirectory()) { //ÊÇÄ¿Â¼£¬·µ»Ø´íÎó
+  if (stat.isDirectory()) { //æ˜¯ç›®å½•ï¼Œè¿”å›é”™è¯¯
     throw createIsDirError(path) 
   }
 
@@ -179,24 +179,24 @@ function resolveSync (iconPath) {
 }
 
 /**
- * Send icon data in response to a request. ·¢ËÍÍ¼±êÊı¾İÒÔÏìÓ¦ÇëÇó
+ * Send icon data in response to a request. å‘é€å›¾æ ‡æ•°æ®ä»¥å“åº”è¯·æ±‚
  *
  * @private
- * @param {IncomingMessage} req //²ÎÊı req ÇëÇó
- * @param {OutgoingMessage} res //²ÎÊı res ÏìÓ¦
- * @param {object} icon //²ÎÊı icon ¶ÔÏó
+ * @param {IncomingMessage} req //å‚æ•° req è¯·æ±‚
+ * @param {OutgoingMessage} res //å‚æ•° res å“åº”
+ * @param {object} icon //å‚æ•° icon å¯¹è±¡
  */
 
 function send (req, res, icon) {
   // Set headers
   var headers = icon.headers
-  var keys = Object.keys(headers) //°ÑiconµÄheadersĞ´ÈëÊı×é
+  var keys = Object.keys(headers) //æŠŠiconçš„headerså†™å…¥æ•°ç»„
   for (var i = 0; i < keys.length; i++) {
     var key = keys[i]
-    res.setHeader(key, headers[key]) //°ÑkeyÒ»¸öÒ»¸öĞ´ÈëÏìÓ¦Í·
+    res.setHeader(key, headers[key]) //æŠŠkeyä¸€ä¸ªä¸€ä¸ªå†™å…¥å“åº”å¤´
   }
 
-  // Validate freshness//ÑéÖ¤ĞÂÏÊ¶È
+  // Validate freshness//éªŒè¯æ–°é²œåº¦
   if (isFresh(req, res)) {
     res.statusCode = 304
     res.end()
