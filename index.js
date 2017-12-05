@@ -179,7 +179,7 @@ function resolveSync (iconPath) {
 }
 
 /**
- * Send icon data in response to a request. 发送图标数据以响应请求
+ * Send icon data in response to a request. //发送图标数据以响应请求
  *
  * @private
  * @param {IncomingMessage} req //参数 req 请求
