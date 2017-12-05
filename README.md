@@ -1,7 +1,11 @@
 # 本仓库存放nodejs2017学年大作业。
 
 ## 作业内容
-阅读[serve-favicon](https://github.com/expressjs/serve-favicon)模块代码
+阅读理解[serve-favicon](https://github.com/expressjs/serve-favicon)模块代码
+
+## 项目内容介绍  
+借阅理解资料存放在docs文件夹内。  
+
 
 ## 模块介绍
 serve-favicon是一个Node.js图标服务的中间件。
