@@ -6,7 +6,21 @@
 ## 项目内容介绍  
 模块功能：将网页图标缓存入本地，减少请求。
 - 借阅理解资料存放在docs文件夹内。  
-
+   注释规范：头注释规范参考
+   引用模块：借口涉及的模块介绍
+   req的method简介
+   cache-control
+- index.js
+   为本模块的出口文件，所有函数都封装在此文件中
+- 函数
+   本模块函数众多，以下按顺序列出：  
+   	favicon (path, options)指定路径提供图标  
+	calcMaxAge (val)根据配置的值计算最大年龄  
+	createIcon (buf, maxAge)从缓冲区和最大时间创建图标数据  
+	createIsDirError (path)创建EISDIR错误  
+	isFresh (req, res)确定缓存表示是否新鲜  
+	resolveSync (iconPath)解决图标的路径  
+	send (req, res, icon)发送图标数据以响应请求  
 
 ## 模块介绍
 serve-favicon是一个Node.js图标服务的中间件。
