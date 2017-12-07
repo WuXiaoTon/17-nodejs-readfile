@@ -10,7 +10,7 @@
    引用模块：借口涉及的模块介绍  
    req的method简介  
    cache-control  
-- index.js
+- [index.js](https://github.com/WuXiaoTon/17-nodejs-readfile/blob/master/index.js)  
    为本模块的出口文件，所有函数都封装在此文件中
 - 函数
    本模块函数众多，以下按顺序列出：  
