@@ -89,3 +89,9 @@ server.listen(3000)
 
 - License    
 [MIT](https://github.com/WuXiaoTon/17-nodejs-readfile/blob/master/LICENSE)
+
+## 思路总结：  
+传入path和options,options包含了maxAge属性来决定缓存时间，若没有传入options则默认为一年。根据path新建缓存区写入图片发送。
+
+## 代码风格：  
+注释清晰，函数作用与参数返回值都很简单明了。
