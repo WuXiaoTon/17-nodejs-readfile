@@ -1,10 +1,10 @@
 # 本仓库存放nodejs2017学年大作业。
 
 ## 作业流程
--- 阅读理解[serve-favicon](https://github.com/expressjs/serve-favicon)模块代码。
--- 添加注释，到[index.js](https://github.com/WuXiaoTon/17-nodejs-readfile/blob/master/index.js)  
--- 使用jshint检查错误，除去句尾缺少分号，还有其它三个error
-![]
+- 阅读理解[serve-favicon](https://github.com/expressjs/serve-favicon)模块代码。
+- 添加注释，到[index.js](https://github.com/WuXiaoTon/17-nodejs-readfile/blob/master/index.js)  
+- 使用jshint检查错误，除去句尾缺少分号，还有其它三个error
+![QQ截图20171211205808.png](https://github.com/WuXiaoTon/17-nodejs-readfile/blob/master/docs/QQ%E6%88%AA%E5%9B%BE20171211205808.png)
 
 ## 项目内容介绍  
 模块功能：将网页图标缓存入本地，减少请求。
