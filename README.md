@@ -11,6 +11,7 @@
    req的method简介  
    cache-control  
 - .eslintrc代码检测
+- .travis.yml持续集成
 - [index.js](https://github.com/WuXiaoTon/17-nodejs-readfile/blob/master/index.js)  
    为本模块的出口文件，所有函数都封装在此文件中
 - 函数
