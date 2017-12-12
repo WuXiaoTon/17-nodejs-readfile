@@ -6,7 +6,7 @@
 - 使用jshint检查错误，除去句尾缺少分号，还有其它三个error
 ![QQ截图20171211205808.png](https://github.com/WuXiaoTon/17-nodejs-readfile/blob/master/docs/QQ%E6%88%AA%E5%9B%BE20171211205808.png)  
 第一条可忽略，jshint建议把"use strict"写入函数。  
-第二条因为模块未安装产生错误。  
+第二条代码错误。  
 第三条为代码粘贴错误，多写入了“}”
 
 ## 项目内容介绍  
