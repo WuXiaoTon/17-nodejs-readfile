@@ -19,7 +19,8 @@
 - .eslintrc代码检测
 - .travis.yml持续集成
 - [index.js](https://github.com/WuXiaoTon/17-nodejs-readfile/blob/master/index.js)  
-   为本模块的出口文件，所有函数都封装在此文件中
+   为本模块的出口文件，所有函数都封装在此文件中。  
+   其中引用了safe-buffer、fresh、etag、fs、ms、parseurl、path模块
 - 函数
    本模块函数众多，以下按顺序列出：  
    	favicon (path, options)指定路径提供图标  
