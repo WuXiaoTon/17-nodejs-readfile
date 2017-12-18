@@ -3,7 +3,7 @@
 ## 作业流程
 - 阅读理解[serve-favicon](https://github.com/expressjs/serve-favicon)模块代码。
 - 添加注释，到[index.js](https://github.com/WuXiaoTon/17-nodejs-readfile/blob/master/index.js)  
-- 使用jshint检查错误，除去句尾缺少分号，还有其它三个error
+- 使用jshint检查错误，除去句尾缺少分号和不合理换行，还有其它三个error
 ![QQ截图20171211205808.png](https://github.com/WuXiaoTon/17-nodejs-readfile/blob/master/docs/QQ%E6%88%AA%E5%9B%BE20171211205808.png)  
 第一条可忽略，jshint建议把"use strict"写入函数。  
 第二条代码错误。  
