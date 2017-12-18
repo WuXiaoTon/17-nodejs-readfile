@@ -8,6 +8,12 @@
 第一条可忽略，jshint建议把"use strict"写入函数。  
 第二条代码错误。  
 第三条为代码粘贴错误，多写入了“}”
+- 使用Mocha测试  
+测试代码[test.js](https://github.com/WuXiaoTon/17-nodejs-readfile/blob/gh-pages/test/test.js)  
+测试结果如下  
+![1.PNG](https://github.com/WuXiaoTon/17-nodejs-readfile/blob/gh-pages/test/1.PNG)  
+![2.PNG](https://github.com/WuXiaoTon/17-nodejs-readfile/blob/gh-pages/test/2.PNG)  
+![2.PNG](https://github.com/WuXiaoTon/17-nodejs-readfile/blob/gh-pages/test/3.PNG)  
 
 ## 项目内容介绍  
 模块功能：将网页图标缓存入本地，减少请求。
